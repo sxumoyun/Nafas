@@ -5,9 +5,9 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AppService } from 'src/app.service';
 import { AirQualityModule } from 'src/modules/air-quality/air-quality.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
+import { NotificationsModule } from 'src/modules/notifications/notifications.module';
 import { StationsModule } from 'src/modules/stations/stations.module';
 import { UsersModule } from 'src/modules/users/users.module';
-
 
 @Module({
   imports: [
@@ -23,8 +23,9 @@ import { UsersModule } from 'src/modules/users/users.module';
     AuthModule,
     UsersModule,
     StationsModule,
+    NotificationsModule,
     AirQualityModule,
   ],
-   providers: [AppService],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -6,7 +6,7 @@ import { Station, StationDocument } from './schema/schema';
 @Injectable()
 export class StationsService {
   constructor(
-    @InjectModel(Station.name) private stationModel: Model<StationDocument>
+    @InjectModel(Station.name) private stationModel: Model<StationDocument>,
   ) {}
 
   async findAll(): Promise<StationDocument[]> {
@@ -23,18 +23,87 @@ export class StationsService {
 
   async seedStations() {
     const count = await this.stationModel.countDocuments();
-    if (count > 0) return;
+    if (count > 0) {
+      // Mavjud stansiyalarni yangilash uchun o'chirib qayta yaratamiz
+      await this.stationModel.deleteMany({});
+    }
 
     const stations = [
-      { name: 'Yunusobod stansiyasi',      district: 'Yunusobod',      coordinates: [41.3565, 69.3232], isActive: true },
-      { name: 'Chilonzor stansiyasi',      district: 'Chilonzor',      coordinates: [41.2995, 69.2401], isActive: true },
-      { name: 'Sergeli stansiyasi',        district: 'Sergeli',        coordinates: [41.2228, 69.2823], isActive: true },
-      { name: 'Bektemir stansiyasi',       district: 'Bektemir',       coordinates: [41.2671, 69.3876], isActive: true },
-      { name: 'Mirzo Ulugbek stansiyasi',  district: 'Mirzo Ulug\'bek', coordinates: [41.3412, 69.3565], isActive: true },
-      { name: 'Shayxontohur stansiyasi',   district: 'Shayxontohur',   coordinates: [41.3198, 69.2654], isActive: true },
+      {
+        name: 'Yunusobod stansiyasi',
+        district: 'Yunusobod',
+        coordinates: [41.3565, 69.3232],
+        isActive: true,
+      },
+      {
+        name: 'Chilonzor stansiyasi',
+        district: 'Chilonzor',
+        coordinates: [41.2995, 69.2401],
+        isActive: true,
+      },
+      {
+        name: 'Sergeli stansiyasi',
+        district: 'Sergeli',
+        coordinates: [41.2228, 69.2823],
+        isActive: true,
+      },
+      {
+        name: 'Bektemir stansiyasi',
+        district: 'Bektemir',
+        coordinates: [41.2671, 69.3876],
+        isActive: true,
+      },
+      {
+        name: "Mirzo Ulug'bek stansiyasi",
+        district: "Mirzo Ulug'bek",
+        coordinates: [41.3412, 69.3565],
+        isActive: true,
+      },
+      {
+        name: 'Shayxontohur stansiyasi',
+        district: 'Shayxontohur',
+        coordinates: [41.3198, 69.2654],
+        isActive: true,
+      },
+      {
+        name: 'Olmazor stansiyasi',
+        district: 'Olmazor',
+        coordinates: [41.328, 69.219],
+        isActive: true,
+      },
+      {
+        name: 'Uchtepa stansiyasi',
+        district: 'Uchtepa',
+        coordinates: [41.283, 69.21],
+        isActive: true,
+      },
+      {
+        name: 'Yakkasaroy stansiyasi',
+        district: 'Yakkasaroy',
+        coordinates: [41.29, 69.27],
+        isActive: true,
+      },
+      {
+        name: 'Almazar stansiyasi',
+        district: 'Almazar',
+        coordinates: [41.37, 69.26],
+        isActive: true,
+      },
+      {
+        name: 'Yashnobod stansiyasi',
+        district: 'Yashnobod',
+        coordinates: [41.305, 69.34],
+        isActive: true,
+      },
+      {
+        name: 'Zangiota stansiyasi',
+        district: 'Zangiota',
+        coordinates: [41.23, 69.18],
+        isActive: true,
+      },
     ];
 
     await this.stationModel.insertMany(stations);
-    console.log('Stansiyalar yaratildi!');
+    console.log('12 ta stansiya yaratildi!');
   }
 }

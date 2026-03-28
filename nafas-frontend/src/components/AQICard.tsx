@@ -1,6 +1,5 @@
-// src/components/AQICard.tsx
 import { getAQIInfo } from "../utils/aqi";
-import AQIBadge from "./AqiBadge";
+import AQIBadge from "./AQIBadge";
 
 interface Props {
   district: string;
@@ -15,12 +14,12 @@ export default function AQICard({ district, aqi, updatedAt, onClick }: Props) {
   return (
     <div
       onClick={onClick}
-      className="bg-white border border-gray-100 rounded-xl p-4 cursor-pointer hover:shadow-md transition-shadow"
+      className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-4 cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5"
     >
-      {/* Tuman nomi */}
-      <p className="text-sm text-gray-500 mb-2">{district}</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+        {district}
+      </p>
 
-      {/* AQI qiymati */}
       <div className="flex items-end gap-2 mb-3">
         <span
           className="text-4xl font-semibold"
@@ -31,14 +30,16 @@ export default function AQICard({ district, aqi, updatedAt, onClick }: Props) {
         <span className="text-sm text-gray-400 mb-1">AQI</span>
       </div>
 
-      {/* Badge */}
       <AQIBadge aqi={aqi} size="sm" />
+      <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+        {info.advice}
+      </p>
 
-      {/* Maslahat */}
-      <p className="text-xs text-gray-400 mt-2">{info.advice}</p>
-
-      {/* Vaqt */}
-      {updatedAt && <p className="text-xs text-gray-300 mt-1">{updatedAt}</p>}
+      {updatedAt && (
+        <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">
+          {updatedAt}
+        </p>
+      )}
     </div>
   );
 }

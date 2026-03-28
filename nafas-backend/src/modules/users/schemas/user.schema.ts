@@ -25,6 +25,9 @@ export class User {
 
   @Prop({ default: false })
   dailyReport: boolean;
+
+  @Prop({ type: [Number], default: null })
+  coordinates: [number, number] | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

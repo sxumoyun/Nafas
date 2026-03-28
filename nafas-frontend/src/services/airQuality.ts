@@ -7,3 +7,5 @@ export const getHistory = (stationId: string, days = 7) =>
 export const getDailyStats = () => api.get("/air-quality/stats/daily");
 export const getRecommendations = (aqi: number) =>
   api.get(`/air-quality/recommendations?aqi=${aqi}`);
+export const getNotifications = () => api.get("/notifications");
+export const markNotificationsRead = () => api.patch("/notifications/read");

@@ -24,13 +24,18 @@ export default function Home() {
   useEffect(() => {
     getLiveData()
       .then((res) => setLiveData(res.data))
-      .catch(() => console.error("Ma'lumot olishda xato"))
       .finally(() => setLoading(false));
   }, []);
 
   const dangerousDistricts = liveData
     .filter((d) => d.aqi && d.aqi > 150)
     .map((d) => d.station.district);
+
+  const avgAqi = liveData.length
+    ? Math.round(
+        liveData.reduce((s, d) => s + (d.aqi ?? 0), 0) / liveData.length,
+      )
+    : 0;
 
   if (loading) {
     return (
@@ -42,16 +47,54 @@ export default function Home() {
 
   return (
     <div className="max-w-5xl mx-auto pb-10">
-      <AlertBanner
-        districts={dangerousDistricts}
-        message="havo sifati xavfli darajada. Tashqariga chiqmaslikni tavsiya etamiz."
-      />
+      {/* Hero section */}
+      <div className="px-4 pt-8 pb-6">
+        <div className="bg-blue-600 rounded-2xl p-6 text-white relative overflow-hidden">
+          <div className="relative z-10">
+            <p className="text-blue-100 text-sm mb-1">Toshkent shahri</p>
+            <h1 className="text-3xl font-bold mb-1">Havo holati</h1>
+            <p className="text-blue-100 text-sm">
+              Real vaqt • Oxirgi yangilanish:{" "}
+              {new Date().toLocaleTimeString("uz-UZ", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+            <div className="mt-4 flex items-center gap-4">
+              <div>
+                <p className="text-4xl font-bold">{avgAqi}</p>
+                <p className="text-blue-100 text-sm">O'rtacha AQI</p>
+              </div>
+              <div className="w-px h-12 bg-blue-400" />
+              <div>
+                <p className="text-lg font-semibold">
+                  {liveData.length} ta tuman
+                </p>
+                <p className="text-blue-100 text-sm">monitoring qilinmoqda</p>
+              </div>
+            </div>
+          </div>
+          {/* Decorative circles */}
+          <div className="absolute -right-8 -top-8 w-40 h-40 bg-blue-500 rounded-full opacity-30" />
+          <div className="absolute -right-4 -bottom-10 w-32 h-32 bg-blue-400 rounded-full opacity-20" />
+        </div>
+      </div>
+
+      {/* Alert */}
+      {dangerousDistricts.length > 0 && (
+        <div className="px-4 mb-4">
+          <AlertBanner
+            districts={dangerousDistricts}
+            message="havo sifati xavfli darajada. Tashqariga chiqmaslikni tavsiya etamiz."
+          />
+        </div>
+      )}
 
       {/* Xarita */}
-      <div className="px-4 mt-6">
+      <div className="px-4 mb-6">
         <Suspense
           fallback={
-            <div className="h-80 bg-gray-100 rounded-xl animate-pulse" />
+            <div className="h-80 bg-gray-100 dark:bg-gray-800 rounded-2xl animate-pulse" />
           }
         >
           <Map stations={liveData} />
@@ -59,17 +102,10 @@ export default function Home() {
       </div>
 
       {/* Sarlavha */}
-      <div className="px-4 mt-6 mb-4">
-        <h1 className="text-xl font-medium text-gray-800">
-          Toshkent havo holati
-        </h1>
-        <p className="text-sm text-gray-400 mt-1">
-          Real vaqt • Oxirgi yangilanish:{" "}
-          {new Date().toLocaleTimeString("uz-UZ", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </p>
+      <div className="px-4 mb-4">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+          Tumanlar bo'yicha AQI
+        </h2>
       </div>
 
       {/* Kartochkalar */}
