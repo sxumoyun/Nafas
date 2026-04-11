@@ -57,6 +57,19 @@ export default function Navbar() {
             {link.label}
           </Link>
         ))}
+
+        {(user?.role === "admin" || user?.role === "superadmin") && (
+          <Link
+            to="/admin"
+            className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
+              pathname === "/admin"
+                ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium"
+                : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+            }`}
+          >
+            Admin
+          </Link>
+        )}
       </div>
 
       {/* Right side */}

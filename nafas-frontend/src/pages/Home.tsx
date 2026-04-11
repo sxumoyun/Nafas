@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import AQICard from "../components/AQICard";
 import AlertBanner from "../components/AlertBanner";
+import { useLocation } from "../hooks/useLocation";
 import { getLiveData } from "../services/airQuality";
 
 const Map = lazy(() => import("../components/Map"));
@@ -20,6 +21,7 @@ interface LiveData {
 export default function Home() {
   const [liveData, setLiveData] = useState<LiveData[]>([]);
   const [loading, setLoading] = useState(true);
+  useLocation();
 
   useEffect(() => {
     getLiveData()

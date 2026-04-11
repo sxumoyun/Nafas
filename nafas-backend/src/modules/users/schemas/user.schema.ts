@@ -28,6 +28,9 @@ export class User {
 
   @Prop({ type: [Number], default: null })
   coordinates: [number, number] | null;
+
+  @Prop({ default: 'user' })
+  role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
