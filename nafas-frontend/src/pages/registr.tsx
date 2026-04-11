@@ -25,10 +25,13 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl border border-gray-100 p-8 w-full max-w-md">
+      <div className="bg-white rounded-2xl border border-gray-200 p-8 w-full max-w-md shadow-sm">
+        {/* Logo */}
         <div className="flex items-center gap-2 mb-8">
-          <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-          <span className="font-medium text-gray-900 text-lg">HavoNazor</span>
+          <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
+            <span className="text-white text-xs font-bold">HN</span>
+          </div>
+          <span className="font-semibold text-gray-900 text-lg">HavoNazor</span>
         </div>
 
         <h1 className="text-xl font-medium text-gray-800 mb-1">
@@ -44,34 +47,34 @@ export default function Register() {
 
         <div className="space-y-4">
           <div>
-            <label className="text-xs text-gray-400 block mb-1">
+            <label className="text-xs text-gray-500 block mb-1">
               Ism familiya
             </label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Alisher Karimov"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100"
             />
           </div>
           <div>
-            <label className="text-xs text-gray-400 block mb-1">Email</label>
+            <label className="text-xs text-gray-500 block mb-1">Email</label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="email@example.com"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100"
             />
           </div>
           <div>
-            <label className="text-xs text-gray-400 block mb-1">Parol</label>
+            <label className="text-xs text-gray-500 block mb-1">Parol</label>
             <input
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               placeholder="Kamida 6 ta belgi"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100"
             />
           </div>
         </div>
