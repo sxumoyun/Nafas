@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
+import { useAuthStore } from "../store/authStore";
+const { setAuth } = useAuthStore();
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,8 +15,7 @@ export default function Login() {
     setLoading(true);
     try {
       const res = await login(form);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setAuth(res.data.user, res.data.token);
       navigate("/");
     } catch (err: any) {
       setError(err.response?.data?.message || "Xato yuz berdi");
