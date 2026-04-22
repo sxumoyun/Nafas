@@ -31,7 +31,7 @@ export default function Register() {
           <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
             <span className="text-white text-xs font-bold">HN</span>
           </div>
-          <span className="font-semibold text-gray-900 text-lg">HavoNazor</span>
+          <span className="font-semibold text-gray-900 text-lg">Nafas</span>
         </div>
 
         <h1 className="text-xl font-medium text-gray-800 mb-1">

@@ -38,7 +38,7 @@ export default function Navbar() {
           <span className="text-white text-xs font-bold">HN</span>
         </div>
         <span className="font-semibold text-gray-900 dark:text-white text-base">
-          HavoNazor
+          Nafas
         </span>
       </Link>
 

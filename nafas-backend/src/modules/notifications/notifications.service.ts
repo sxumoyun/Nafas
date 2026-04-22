@@ -44,13 +44,13 @@ export class NotificationsService {
 
     // Email yuborish
     await this.transporter.sendMail({
-      from: `"HavoNazor" <${this.configService.get('EMAIL_USER')}>`,
+      from: `"Nafas" <${this.configService.get('EMAIL_USER')}>`,
       to: email,
       subject: `⚠️ ${district}: Havo sifati xavfli darajada!`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
           <div style="background: #2E74B5; padding: 20px; border-radius: 12px 12px 0 0;">
-            <h2 style="color: white; margin: 0;">🌫️ HavoNazor</h2>
+            <h2 style="color: white; margin: 0;">🌫️ Nafas</h2>
           </div>
           <div style="background: #fff; border: 1px solid #e5e7eb; padding: 24px; border-radius: 0 0 12px 12px;">
             <div style="background: #FFEBEE; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
@@ -72,7 +72,7 @@ export class NotificationsService {
               </tr>
             </table>
             <p style="color: #6b7280; font-size: 13px; margin-top: 16px;">
-              Bu xabar HavoNazor tizimi tomonidan avtomatik yuborildi.
+              Bu xabar Nafas tizimi tomonidan avtomatik yuborildi.
             </p>
           </div>
         </div>
