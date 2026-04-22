@@ -12,7 +12,6 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('api');
 
   await app.listen(3000);
   console.log('Server ishga tushdi: http://localhost:3000');

@@ -148,30 +148,39 @@ export class AirQualityService {
     aqi: number,
     stationCoordinates: [number, number],
   ) {
-    const threshold = this.configService.get<number>('ALERT_THRESHOLD') || 100;
-    if (aqi < threshold) return;
-
     const users = await this.usersService.findAll();
 
     for (const user of users) {
       if (!user.emailNotification) continue;
 
-      // Foydalanuvchi koordinatalari bo'lsa — masofa tekshiriladi
-      if (user.coordinates) {
-        const distance = this.calculateDistance(
-          user.coordinates[0],
-          user.coordinates[1],
-          stationCoordinates[0],
-          stationCoordinates[1],
-        );
+      // Koordinata yo'q bo'lsa — email yubormaymiz
+      if (!user.coordinates) {
+        console.log(`${user.email} — koordinata yo'q, o'tkazib yuborildi`);
+        continue;
+      }
 
-        // 10 km dan uzoq bo'lsa — email yuborilmaydi
-        if (distance > 10) {
-          console.log(
-            `${user.email} — ${district} dan ${distance.toFixed(1)} km uzoq, email o'tkazib yuborildi`,
-          );
-          continue;
-        }
+      // Masofa tekshirish — 10 km dan uzoq bo'lsa o'tkazib yuboramiz
+      const distance = this.calculateDistance(
+        user.coordinates[0],
+        user.coordinates[1],
+        stationCoordinates[0],
+        stationCoordinates[1],
+      );
+
+      if (distance > 10) {
+        console.log(
+          `${user.email} — ${district} dan ${distance.toFixed(1)} km uzoq, o'tkazib yuborildi`,
+        );
+        continue;
+      }
+
+      // AQI chegarasi tekshirish
+      const threshold = user.alertThreshold ?? 100;
+      if (aqi < threshold) {
+        console.log(
+          `${user.email} — AQI ${aqi} < chegara ${threshold}, o'tkazib yuborildi`,
+        );
+        continue;
       }
 
       await this.notificationsService.sendAlert(
