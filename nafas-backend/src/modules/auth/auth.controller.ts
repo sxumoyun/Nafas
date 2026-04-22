@@ -3,13 +3,13 @@ import { LoginDto } from 'src/modules/auth/dtos/login.dto';
 import { RegisterDto } from 'src/modules/auth/dtos/registr.dto';
 import { AuthService } from './auth.service';
 
-
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
   register(@Body() dto: RegisterDto) {
+    console.log('jjjjjjjj');
     return this.authService.register(dto);
   }
 

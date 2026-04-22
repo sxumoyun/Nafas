@@ -1,40 +1,34 @@
-import { ConflictException, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { UserRepository } from 'src/modules/users/user.repository';
 import { User, UserDocument } from './schemas/user.schema';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   async create(data: Partial<User>): Promise<UserDocument> {
-    const existing = await this.userModel.findOne({ email: data.email });
-    if (existing)
-      throw new ConflictException("Bu email allaqachon ro'yxatdan o'tgan");
-    return this.userModel.create(data);
+    const existing = await this.userRepository.create(data);
+    console.log(existing);
+    return existing;
   }
 
   async findByEmail(email: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({ email });
+    return this.userRepository.findByEmail(email);
   }
 
   async findById(id: string): Promise<UserDocument | null> {
-    return this.userModel.findById(id).select('-password');
+    return this.userRepository.findById(id);
   }
 
   async findAll() {
-    return this.userModel.find({ emailNotification: true });
+    return this.userRepository.findAll();
   }
 
   async updateProfile(id: string, data: Partial<User>) {
-    return this.userModel
-      .findByIdAndUpdate(id, data, { new: true })
-      .select('-password');
+    return this.userRepository.updateProfile(id, data);
   }
 
   async updateLocation(id: string, coordinates: [number, number]) {
-    return this.userModel
-      .findByIdAndUpdate(id, { coordinates }, { new: true })
-      .select('-password');
+    return this.userRepository.updateLocation(id, coordinates);
   }
 }

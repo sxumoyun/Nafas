@@ -17,18 +17,42 @@ export class AuthService {
       ...dto,
       password: hashedPassword,
     });
-    const token = this.jwtService.sign({ sub: user._id, email: user.email });
-    return { token, user: { id: user._id, name: user.name, email: user.email } };
+    const token = this.jwtService.sign({
+      sub: user._id,
+      email: user.email,
+      role: user.role,
+    });
+    return {
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    };
   }
 
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email);
-    if (!user) throw new UnauthorizedException('Email yoki parol noto\'g\'ri');
+    if (!user) throw new UnauthorizedException("Email yoki parol noto'g'ri");
 
     const isMatch = await bcrypt.compare(dto.password, user.password);
-    if (!isMatch) throw new UnauthorizedException('Email yoki parol noto\'g\'ri');
+    if (!isMatch) throw new UnauthorizedException("Email yoki parol noto'g'ri");
 
-    const token = this.jwtService.sign({ sub: user._id, email: user.email });
-    return { token, user: { id: user._id, name: user.name, email: user.email } };
+    const token = this.jwtService.sign({
+      sub: user._id,
+      email: user.email,
+      role: user.role,
+    });
+    return {
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    };
   }
 }
