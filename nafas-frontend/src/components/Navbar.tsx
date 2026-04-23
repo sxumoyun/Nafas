@@ -35,7 +35,7 @@ export default function Navbar() {
       {/* Logo */}
       <Link to="/" className="flex items-center gap-2">
         <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
-          <span className="text-white text-xs font-bold">HN</span>
+          <span className="text-white text-xs font-bold">N</span>
         </div>
         <span className="font-semibold text-gray-900 dark:text-white text-base">
           Nafas
