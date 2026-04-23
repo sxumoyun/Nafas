@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
 import { useAuthStore } from "../store/authStore";
-const { setAuth } = useAuthStore();
 
 export default function Login() {
+  const { setAuth } = useAuthStore(); // ✅ ichida
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -27,10 +27,9 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl border border-gray-200 p-8 w-full max-w-md shadow-sm">
-        {/* Logo */}
         <div className="flex items-center gap-2 mb-8">
           <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center">
-            <span className="text-white text-xs font-bold">HN</span>
+            <span className="text-white text-xs font-bold">NF</span>
           </div>
           <span className="font-semibold text-gray-900 text-lg">Nafas</span>
         </div>

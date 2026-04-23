@@ -12,28 +12,64 @@ import Register from "./pages/registr";
 export default function App() {
   return (
     <HashRouter>
-      <div className="relative min-h-screen">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/*"
-            element={
-              <div className="min-h-screen">
-                <Navbar />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/stats" element={<Stats />} />
-                  <Route path="/districts" element={<Districts />} />
-                  <Route path="/tips" element={<Tips />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/admin" element={<Admin />} />
-                </Routes>
-              </div>
-            }
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <Home />
+            </>
+          }
+        />
+        <Route
+          path="/stats"
+          element={
+            <>
+              <Navbar />
+              <Stats />
+            </>
+          }
+        />
+        <Route
+          path="/districts"
+          element={
+            <>
+              <Navbar />
+              <Districts />
+            </>
+          }
+        />
+        <Route
+          path="/tips"
+          element={
+            <>
+              <Navbar />
+              <Tips />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Navbar />
+              <Profile />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <>
+              <Navbar />
+              <Admin />
+            </>
+          }
+        />
+      </Routes>
     </HashRouter>
   );
 }
